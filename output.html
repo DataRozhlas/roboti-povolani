@@ -1,0 +1,48 @@
+<div class="b-data__content" id="content">
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+<script type="text/javascript">document.getElementsByTagName('article')[0].classList.add('b-data--no-img');</script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<style>li{background:none !important;margin:0 !important;padding:0 !important}ul,ol{list-style:initial !important;font-size:medium !important;line-height:1.5 !important}hr{max-width:none !important}</style>
+<div class="row-main row-main--article">
+<h1 class="b-data__title b-data__title--sm">
+Nahradí vaši práci roboti? Podívejte se
+</h1>
+</div>
+<div class="row-main row-main--narrow">
+<p class="text-bold text-lg">Lorem ipsum tralala</p>
+<p class="meta meta--icon">
+	<span class="icon-svg icon-svg--bullet">
+	<svg class="icon-svg__svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+		<use xlink:href="https://www.irozhlas.cz/sites/all/themes/custom/irozhlas/img/bg/icons-svg.svg#icon-bullet" x="0" y="0" width="100%" height="100%"></use>
+	</svg>
+</span>
+<!--[[ZPRAVY_SNOWFALL_METADATA:]]-->
+</p>
+
+
+
+<div class="ui-widget">
+  <label for="jobsearch">Práce: </label>
+  <input id="jobsearch" size="60">
+</div>
+
+<div id="result"></div>
+
+<p class="meta meta--right meta--big">
+<!--[[ZPRAVY_SNOWFALL_AUTHORS:FOOTER]]-->
+</p>
+</div>
+<!--[[ZPRAVY_SNOWFALL_RELATED:ARTICLES]]-->
+</div>
+</article>
+</div>
+</div>
+</div><script>
+$(function(){$.ajax({dataType:"text",url:"https://data.irozhlas.cz/roboti-povolani/data/jobs_names.csv",success:function(data){processData(data.split("\n"));}});function processData(jobs){loadData("Kalič");$("#jobsearch").click(function(){$(this).val("");});$("#jobsearch").autocomplete({source:jobs,minLength:3});var shownJob;$(".ui-menu").click(function(){if(shownJob!=$("#jobsearch").val()){loadData($("#jobsearch").val(),1);}});$("#jobsearch").on("keydown",function(event){if(event.which===13){$(".ui-menu").hide();if(shownJob!=$("#jobsearch").val()){loadData($("#jobsearch").val(),1);}}});var timeoutID1=0;$("#jobsearch").on("input",function(){window.clearTimeout(timeoutID1);timeoutID1=window.setTimeout(function(){if(shownJob!=$("#jobsearch").val()){loadData($("#jobsearch").val(),1);}},500);});}
+function loadData(job){var slug=bezdiak(job).toLowerCase().replace(/ /g,"_").replace(/,|"/g,"");$.getJSON("https://data.irozhlas.cz/roboti-povolani/jobs_data/"+slug+".json",function(data){$("#result").text(JSON.stringify(data));});}
+function bezdiak(text){var sdiak="áäčďéěíĺľňóô öŕšťúů üýřžÁÄČĎÉĚÍĹĽŇÓÔ ÖŔŠŤÚŮ ÜÝŘŽ";var bdiak="aacdeeillnoo orstuu uyrzAACDEEILLNOO ORSTUU UYRZ";tx="";for(p=0;p<text.length;p++){if(sdiak.indexOf(text.charAt(p))!=-1){tx+=bdiak.charAt(sdiak.indexOf(text.charAt(p)));}
+else{tx+=text.charAt(p);}}
+return tx}});
+var links=document.getElementsByTagName('a');for(var i=0,linksLength=links.length;i<linksLength;i++){if(links[i].hostname!=window.location.hostname){links[i].target='_blank';links[i].rel='noopener noreferrer';};};</script>
