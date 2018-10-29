@@ -8,49 +8,23 @@ $( function () {
     function processData(jobs) {
         loadData("Kalič");
 
-        $("#jobsearch").click(function() {
-            $(this).val("");
-        });
-
-        $("#jobsearch").autocomplete({
-            source: jobs,
-            minLength: 3
-        });
-
+        jobs.sort().forEach(function(entry) {
+            $("#selectMenu").append("<option>" + entry + "</option>");
+        })
         
-        // autocomplete load
-        var shownJob;
-        $(".ui-menu").click(function () {
-            if (shownJob != $("#jobsearch").val()) {
-                loadData($("#jobsearch").val(), 1);
-            }
-        });
-        $("#jobsearch").on("keydown", function (event) {
-            if (event.which === 13) {
-                $(".ui-menu").hide();
-                if (shownJob != $("#jobsearch").val()) {
-                    loadData($("#jobsearch").val(), 1);
-                }
-            }
-        });
 
-        var timeoutID1 = 0;
-        $("#jobsearch").on("input", function () {
-            window.clearTimeout(timeoutID1);
-            timeoutID1 = window.setTimeout( function () {
-                if (shownJob != $("#jobsearch").val()) {
-                    loadData($("#jobsearch").val(), 1);
-                }
-            }, 500);
+        $("#selectMenu").change(function(choice) {
+            loadData($( "select option:selected" ).text());
         });
     }
 
     function loadData(job) {
-        var slug = bezdiak(job).toLowerCase().replace(/ /g,"_").replace(/"/g,"");
+        var slug = bezdiak(job).toLowerCase().replace(/ /g,"_").replace(/–/g,"-").replace(/"/g,"");
+        console.log(slug);
         $.getJSON("https://data.irozhlas.cz/roboti-povolani/jobs_data/" + slug + ".json", function(data) {
             drawChartGeneral(data.obecne);
             drawChartSoft(data.mekke);
-            drawRoboBar(data);
+            drawRoboBar(data, job);
         });
     }
 
@@ -63,7 +37,7 @@ $( function () {
             if (data[category]) {
                 values.push(data[category]);
             } else {
-                values.push(0);
+                values.push(0.499);
             }
         })
 
@@ -149,7 +123,7 @@ $( function () {
             if (data[category]) {
                 values.push(data[category]);
             } else {
-                values.push(0);
+                values.push(0.499);
             }
         })
         var chart = Highcharts.chart('graf2', {
@@ -226,7 +200,7 @@ $( function () {
         });
     }
 
-    function drawRoboBar(data) {
+    function drawRoboBar(data, job) {
         var robotized = ["Počítačová způsobilost", "Numerická způsobilost", "Jazyková způsobilost v dalším cizím jazyce", 
                 "Jazyková způsobilost v angličtině", "Způsobilost k řízení osobního automobilu", "Celoživotní učení",
                 "Zvládání zátěže", "Kooperace (spolupráce)", "Flexibilita", "Plánování a organizování práce", 
@@ -273,14 +247,13 @@ $( function () {
         genRobo = parseInt(genRobo);
 
         var ratio = parseInt(genRobo/genTotal*100)
-        console.log(ratio);
 
         var chart = Highcharts.chart('grafBar', {
             chart: {
                 type: 'bar'
             },
             title: {
-                text: 'Roboti vás zastoupí v ' + ratio + " % kompetencí"
+                text: 'Roboti zastoupí povolání <b>' + job + "</b> v " + ratio + " % kompetencí"
             },
             xAxis: {
                 categories: ['Robotizace'],

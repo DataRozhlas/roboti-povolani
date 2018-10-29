@@ -207,11 +207,9 @@
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/highcharts-more.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 
 <script type="text/javascript">document.getElementsByTagName('article')[0].classList.add('b-data--no-img');</script>
-<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<style>li{background:none !important;margin:0 !important;padding:0 !important}ul,ol{list-style:initial !important;font-size:medium !important;line-height:1.5 !important}hr{max-width:none !important}</style>
+<style>li{background:none !important;margin:0 !important;padding:0 !important}ul,ol{list-style:initial !important;font-size:medium !important;line-height:1.5 !important}hr{max-width:none !important}#selectMenu{width:100%}#selectMenu option{width:100%}</style>
 <div class="row-main row-main--article">
 <h1 class="b-data__title b-data__title--sm">
 Zaměstnance v Česku i ve světě nahrazují roboti. Podívejte se, jestli se to může týkat i vás
@@ -230,17 +228,10 @@ Zaměstnance v Česku i ve světě nahrazují roboti. Podívejte se, jestli se t
 
 <figure class="b-detail__img"><img src="https://interaktivni.rozhlas.cz/brexit/media/cover.jpg" width="100%" /><figcaption>Foto <a href='#'>ČTK</a></figcaption></figure>
 
-<div class="ui-widget">
-  <label for="jobsearch">Práce: </label>
-  <input id="jobsearch" size="60">
-</div>
-
-<div id="graf1"></div>
-
-<div id="graf2"></div>
-
+<p><select id="selectMenu"></select>
 <div id="grafBar" style="height:250px;"></div>
-
+<div id="graf1"></div>
+<div id="graf2"></div></p>
 <div id="result"></div>
 
 <p class="meta meta--right meta--big">
@@ -253,16 +244,17 @@ Zaměstnance v Česku i ve světě nahrazují roboti. Podívejte se, jestli se t
 </div>
 </div>
 </div><script>
-$(function(){$.ajax({dataType:"text",url:"https://data.irozhlas.cz/roboti-povolani/data/jobs_names.csv",success:function(data){processData(data.split("\n"));}});function processData(jobs){loadData("Kalič");$("#jobsearch").click(function(){$(this).val("");});$("#jobsearch").autocomplete({source:jobs,minLength:3});var shownJob;$(".ui-menu").click(function(){if(shownJob!=$("#jobsearch").val()){loadData($("#jobsearch").val(),1);}});$("#jobsearch").on("keydown",function(event){if(event.which===13){$(".ui-menu").hide();if(shownJob!=$("#jobsearch").val()){loadData($("#jobsearch").val(),1);}}});var timeoutID1=0;$("#jobsearch").on("input",function(){window.clearTimeout(timeoutID1);timeoutID1=window.setTimeout(function(){if(shownJob!=$("#jobsearch").val()){loadData($("#jobsearch").val(),1);}},500);});}
-function loadData(job){var slug=bezdiak(job).toLowerCase().replace(/ /g,"_").replace(/"/g,"");$.getJSON("https://data.irozhlas.cz/roboti-povolani/jobs_data/"+slug+".json",function(data){drawChartGeneral(data.obecne);drawChartSoft(data.mekke);drawRoboBar(data);});}
-function drawChartGeneral(data){var categories=["Počítačová způsobilost","Numerická způsobilost","Jazyková způsobilost v dalším cizím jazyce","Jazyková způsobilost v češtině","Ekonomické povědomí","Právní povědomí","Jazyková způsobilost v angličtině","Způsobilost k řízení osobního automobilu"];var values=[];categories.forEach(function(category){if(data[category]){values.push(data[category]);}else{values.push(0);}})
+$(function(){$.ajax({dataType:"text",url:"https://data.irozhlas.cz/roboti-povolani/data/jobs_names.csv",success:function(data){processData(data.split("\n"));}});function processData(jobs){loadData("Kalič");jobs.sort().forEach(function(entry){$("#selectMenu").append("<option>"+entry+"</option>");})
+$("#selectMenu").change(function(choice){loadData($("select option:selected").text());});}
+function loadData(job){var slug=bezdiak(job).toLowerCase().replace(/ /g,"_").replace(/–/g,"-").replace(/"/g,"");console.log(slug);$.getJSON("https://data.irozhlas.cz/roboti-povolani/jobs_data/"+slug+".json",function(data){drawChartGeneral(data.obecne);drawChartSoft(data.mekke);drawRoboBar(data,job);});}
+function drawChartGeneral(data){var categories=["Počítačová způsobilost","Numerická způsobilost","Jazyková způsobilost v dalším cizím jazyce","Jazyková způsobilost v češtině","Ekonomické povědomí","Právní povědomí","Jazyková způsobilost v angličtině","Způsobilost k řízení osobního automobilu"];var values=[];categories.forEach(function(category){if(data[category]){values.push(data[category]);}else{values.push(0.499);}})
 var chart=Highcharts.chart('graf1',{chart:{polar:true,type:'area'},title:{text:'Obecné dovednosti',},pane:{size:'80%'},xAxis:{categories:categories,tickmarkPlacement:'on',lineWidth:0},yAxis:{gridLineInterpolation:'polygon',lineWidth:0,tickInterval:1,min:0,max:3,labels:{enabled:false}},tooltip:{shared:true,pointFormat:'<span style="color:{series.color}">{series.name}: <b>{point.y:,.0f}</b><br/>'},legend:{align:'right',verticalAlign:'top',y:70,layout:'vertical',enabled:false},credits:{enabled:false},series:[{name:'Úroveň kvalifikace (1-3)',data:values,pointPlacement:'on'}],responsive:{rules:[{condition:{maxWidth:500},chartOptions:{pane:{size:'50%'},}}]}});}
-function drawChartSoft(data){var categories=["Celoživotní učení","Zvládání zátěže","Samostatnost","Objevování a orientace v informacích","Kooperace (spolupráce)","Uspokojování zákaznických potřeb","Kreativita","Aktivní přístup","Flexibilita","Plánování a organizování práce","Vedení lidí (leadership)","Výkonnost","Ovlivňování ostatních","Efektivní komunikace","Řešení problémů"];var values=[];categories.forEach(function(category){if(data[category]){values.push(data[category]);}else{values.push(0);}})
+function drawChartSoft(data){var categories=["Celoživotní učení","Zvládání zátěže","Samostatnost","Objevování a orientace v informacích","Kooperace (spolupráce)","Uspokojování zákaznických potřeb","Kreativita","Aktivní přístup","Flexibilita","Plánování a organizování práce","Vedení lidí (leadership)","Výkonnost","Ovlivňování ostatních","Efektivní komunikace","Řešení problémů"];var values=[];categories.forEach(function(category){if(data[category]){values.push(data[category]);}else{values.push(0.499);}})
 var chart=Highcharts.chart('graf2',{chart:{polar:true,type:'area'},title:{text:'Měkké kompetence',},pane:{size:'80%'},xAxis:{categories:categories,tickmarkPlacement:'on',lineWidth:0},yAxis:{gridLineInterpolation:'polygon',lineWidth:0,tickInterval:1,min:0,max:5,labels:{enabled:false}},tooltip:{shared:true,pointFormat:'<span style="color:{series.color}">{series.name}: <b>{point.y:,.0f}</b><br/>'},legend:{enabled:false},credits:{enabled:false},series:[{name:'Úroveň kvalifikace (1-5)',data:values,pointPlacement:'on'}],responsive:{rules:[{condition:{maxWidth:500},chartOptions:{pane:{size:'65%'},xAxis:{labels:{style:{"fontSize":"8px"}}},}}]}});}
-function drawRoboBar(data){var robotized=["Počítačová způsobilost","Numerická způsobilost","Jazyková způsobilost v dalším cizím jazyce","Jazyková způsobilost v angličtině","Způsobilost k řízení osobního automobilu","Celoživotní učení","Zvládání zátěže","Kooperace (spolupráce)","Flexibilita","Plánování a organizování práce","Výkonnost"];var catGeneral=["Počítačová způsobilost","Numerická způsobilost","Jazyková způsobilost v dalším cizím jazyce","Jazyková způsobilost v češtině","Ekonomické povědomí","Právní povědomí","Jazyková způsobilost v angličtině","Způsobilost k řízení osobního automobilu"];var catSoft=["Celoživotní učení","Zvládání zátěže","Samostatnost","Objevování a orientace v informacích","Kooperace (spolupráce)","Uspokojování zákaznických potřeb","Kreativita","Aktivní přístup","Flexibilita","Plánování a organizování práce","Vedení lidí (leadership)","Výkonnost","Ovlivňování ostatních","Efektivní komunikace","Řešení problémů"];var values={};for(var attrname in data.obecne){values[attrname]=data.obecne[attrname];}
+function drawRoboBar(data,job){var robotized=["Počítačová způsobilost","Numerická způsobilost","Jazyková způsobilost v dalším cizím jazyce","Jazyková způsobilost v angličtině","Způsobilost k řízení osobního automobilu","Celoživotní učení","Zvládání zátěže","Kooperace (spolupráce)","Flexibilita","Plánování a organizování práce","Výkonnost"];var catGeneral=["Počítačová způsobilost","Numerická způsobilost","Jazyková způsobilost v dalším cizím jazyce","Jazyková způsobilost v češtině","Ekonomické povědomí","Právní povědomí","Jazyková způsobilost v angličtině","Způsobilost k řízení osobního automobilu"];var catSoft=["Celoživotní učení","Zvládání zátěže","Samostatnost","Objevování a orientace v informacích","Kooperace (spolupráce)","Uspokojování zákaznických potřeb","Kreativita","Aktivní přístup","Flexibilita","Plánování a organizování práce","Vedení lidí (leadership)","Výkonnost","Ovlivňování ostatních","Efektivní komunikace","Řešení problémů"];var values={};for(var attrname in data.obecne){values[attrname]=data.obecne[attrname];}
 for(var attrname in data.mekke){values[attrname]=data.mekke[attrname];}
 var genTotal=0;var genRobo=0;var affected=[];catGeneral.forEach(function(category){if(data.obecne[category]){genTotal+=data.obecne[category];if($.inArray(category,robotized)!==-1){genRobo+=data.obecne[category];affected.push(category);}}});catSoft.forEach(function(category){if(data.mekke[category]){genTotal+=data.mekke[category]/5*3;if($.inArray(category,robotized)!==-1){genRobo+=data.mekke[category]/5*3;affected.push(category);}}});genTotal=parseInt(genTotal);genRobo=parseInt(genRobo);var ratio=parseInt(genRobo/genTotal*100)
-console.log(ratio);var chart=Highcharts.chart('grafBar',{chart:{type:'bar'},title:{text:'Roboti vás zastoupí v '+ratio+" % kompetencí"},xAxis:{categories:['Robotizace'],labels:{enabled:false},},yAxis:{min:0,title:{enabled:false}},tooltip:{enabled:false},legend:{enabled:false},plotOptions:{series:{stacking:'percent'}},series:[{name:'Nerobotizováno',data:[genTotal-genRobo]},{name:'Robotizováno',data:[genRobo]}],credits:{enabled:false}});affected_str="";affected.forEach(function(competence){affected_str+=competence.toLowerCase()+", "});$("#result").text("Roboti vás zastoupí v těchto oblastech: "+affected_str.replace(/, $/,"."));}
+var chart=Highcharts.chart('grafBar',{chart:{type:'bar'},title:{text:'Roboti zastoupí povolání <b>'+job+"</b> v "+ratio+" % kompetencí"},xAxis:{categories:['Robotizace'],labels:{enabled:false},},yAxis:{min:0,title:{enabled:false}},tooltip:{enabled:false},legend:{enabled:false},plotOptions:{series:{stacking:'percent'}},series:[{name:'Nerobotizováno',data:[genTotal-genRobo]},{name:'Robotizováno',data:[genRobo]}],credits:{enabled:false}});affected_str="";affected.forEach(function(competence){affected_str+=competence.toLowerCase()+", "});$("#result").text("Roboti vás zastoupí v těchto oblastech: "+affected_str.replace(/, $/,"."));}
 function bezdiak(text){var sdiak="áäčďéěíĺľňóô öŕšťúů üýřžÁÄČĎÉĚÍĹĽŇÓÔ ÖŔŠŤÚŮ ÜÝŘŽ";var bdiak="aacdeeillnoo orstuu uyrzAACDEEILLNOO ORSTUU UYRZ";tx="";for(p=0;p<text.length;p++){if(sdiak.indexOf(text.charAt(p))!=-1){tx+=bdiak.charAt(sdiak.indexOf(text.charAt(p)));}
 else{tx+=text.charAt(p);}}
 return tx}});
