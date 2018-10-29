@@ -14,6 +14,8 @@ $( function () {
 
         $("#selectMenu").select2();
 
+        $("#select2-selectMenu-container").text("Kalič");
+
         $("#selectMenu").change(function(choice) {
             loadData($( "select option:selected" ).text());
         });
@@ -294,7 +296,7 @@ $( function () {
         affected.forEach(function(competence) {
             affected_str += competence.toLowerCase() + ", "
         });
-        $("#result").text("Roboti vás zastoupí v těchto oblastech: " + affected_str.replace(/, $/,"."));
+        $("#result").text("Roboti zastoupí vybrané povolání v těchto oblastech: " + affected_str.replace(/, $/,"."));
     }
 
     function bezdiak(text) {

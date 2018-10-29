@@ -203,38 +203,55 @@
 
 		<main id="main" class="main" role="main">	
 		<article role="article" class="b-data"> 			
-			<div class="b-data__content" id="content">
+			<div class="b-data__bg" style="background-image: url('https://www.irozhlas.cz/sites/default/files/styles/zpravy_snowfall/public/uploader/industry-3080550_192_181029-201258_zlo.jpg?itok=1zgwyPnD');"><span class="b-data__caption">Foto <a href='https://pixabay.com/en/industry-steel-grinder-technology-3080550/'>Pixabay (CC0)</a></span></div>
+<header class="b-data__header">
+<div class="row-main">
+	<h1 class="b-data__title">
+		<strong>Zaměstnance v Česku i ve světě nahrazují roboti. Podívejte se, jestli se to může týkat i vás</strong>
+	</h1>
+	<p class="meta meta--lg">
+	<!--[[ZPRAVY_SNOWFALL_AUTHORS:HEADER]]-->
+	<span class="meta__separator">|</span>
+	<time>30. října 2018</time>
+	</p>	
+	<p>
+	<a href="#content" class="b-data__link js-scroll-to">
+	Čtěte dále
+	<span class="b-data__link-icon">
+	<span class="icon-svg icon-svg--arrow-down">
+	<svg class="icon-svg__svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+		<use xlink:href="/sites/all/themes/custom/irozhlas/img/bg/icons-svg.svg#icon-arrow-down" x="0" y="0" width="100%" height="100%"></use>
+	</svg>
+</span>
+</span>
+</a>
+</p>
+</div>
+</header> 
+
+<div class="b-data__content" id="content">
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/highcharts-more.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
-<script type="text/javascript">document.getElementsByTagName('article')[0].classList.add('b-data--no-img');</script>
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css">
-<style>li{background:none !important;margin:0 !important;padding:0 !important}ul,ol{list-style:initial !important;font-size:medium !important;line-height:1.5 !important}hr{max-width:none !important}.select2-container--default .select2-results__option--highlighted[aria-selected]{background-color:#5897fb !important}#selectMenu{width:100%}</style>
-<div class="row-main row-main--article">
-<h1 class="b-data__title b-data__title--sm">
-Zaměstnance v Česku i ve světě nahrazují roboti. Podívejte se, jestli se to může týkat i vás
-</h1>
-</div>
+<style>li{background:none !important;margin:0 !important;padding:0 !important}ul,ol{list-style:initial !important;font-size:medium !important;line-height:1.5 !important}hr{max-width:none !important}.select2-container--default .select2-results__option--highlighted[aria-selected]{background-color:#5897fb !important}#selectMenu{width:100%}#result{font-size:small}</style>
 <div class="row-main row-main--narrow">
-<p class="text-bold text-lg">Lorem ipsum tralala</p>
-<p class="meta meta--icon">
-	<span class="icon-svg icon-svg--bullet">
-	<svg class="icon-svg__svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-		<use xlink:href="https://www.irozhlas.cz/sites/all/themes/custom/irozhlas/img/bg/icons-svg.svg#icon-bullet" x="0" y="0" width="100%" height="100%"></use>
-	</svg>
-</span>
-<!--[[ZPRAVY_SNOWFALL_METADATA:]]-->
-</p>
 
-<figure class="b-detail__img"><img src="https://interaktivni.rozhlas.cz/brexit/media/cover.jpg" width="100%" /><figcaption>Foto <a href='#'>ČTK</a></figcaption></figure>
+<p class="text-bold text-lg">Roboti už teď nahrazují zaměstnance automobilek, bank i zemědělských společností. Podle analýz je Česko jednou ze zemí, které jsou robotizací ohroženy nejvíce. Datoví žurnalisté serveru iROZHLAS.cz zkoumali, jestli se automatizace může dotknout i vašeho zaměstnání.</p>
 
-<p><select id="selectMenu"></select>
+<p>Svět stojí na prahu robotizace - a Česko je jí v Evropě ohroženo možná nejvíce. Tvrdí to alespoň <a href="https://ct24.ceskatelevize.cz/veda/2108561-ceska-republika-je-robotizaci-ohrozena-nejvic-v-evrope-tvrdi-studie">studie</a> amerického McKinseyho institutu. V Česku je podle ní ohroženo robotizací 52,2 procent zaměstnanců, více než v celém zbytku Evropy.</p>
+<p>Trend nahrazování lidské práce automatizovanou je podle odborníků nezastavitelný. Česká pracovní místa jsou v ohrožení především kvůli vysokému podílu málo kvalifikovaných, manuálních pozic. Automatizaci přitom odolávají především kreativní a také vysoce specializovaná zaměstnání. V interaktivní aplikaci iROZHLAS.cz můžete zjistit, jak moc je nástupem robotů ohroženo libovolné z téměř dvou tisíc povolání.</p>
+<p>Vyberte zaměstnání: <select id="selectMenu"></select>
 <div id="grafBar" style="height:250px;"></div>
 <div id="graf1"></div>
 <div id="graf2"></div></p>
 <div id="result"></div>
+
+<p><em>Data o zaměstnáních pochází z <a href="https://www.nsp.cz/">Národní soustavy povolání</a>. Jednotlivé kompetence zařazovali datové žurnalisté iROZHLAS.cz.</em></p>
+<p>Robotizaci v českém prostředí se loni věnovala i <a href="https://ekonom.ihned.cz/c1-65716160-prace-nebude">studie</a> Úřadu vlády ČR. Do patnácti let by měly technologické změny zlikvidovat 700 tisíc starých pracovních míst, zároveň by ale měly vytvořit 300 tisíc nových. </p>
+<p>Mezi nejohroženější skupiny zařadila vládní studie dělníky pracující s kovem, sekretářky, prodavačky či řidiče. V bezpečí mají být naopak internetoví vývojáři, lékaři nebo ošetřovatelé.</p>
 
 <p class="meta meta--right meta--big">
 <!--[[ZPRAVY_SNOWFALL_AUTHORS:FOOTER]]-->
@@ -247,7 +264,7 @@ Zaměstnance v Česku i ve světě nahrazují roboti. Podívejte se, jestli se t
 </div>
 </div><script>
 $(function(){$.ajax({dataType:"text",url:"https://data.irozhlas.cz/roboti-povolani/data/jobs_names.csv",success:function(data){processData(data.split("\n"));}});function processData(jobs){loadData("Kalič");jobs.sort().forEach(function(entry){$("#selectMenu").append("<option>"+entry+"</option>");})
-$("#selectMenu").select2();$("#selectMenu").change(function(choice){loadData($("select option:selected").text());});}
+$("#selectMenu").select2();$("#select2-selectMenu-container").text("Kalič");$("#selectMenu").change(function(choice){loadData($("select option:selected").text());});}
 function loadData(job){var slug=bezdiak(job).toLowerCase().replace(/ /g,"_").replace(/–/g,"-").replace(/"/g,"");console.log(slug);$.getJSON("https://data.irozhlas.cz/roboti-povolani/jobs_data/"+slug+".json",function(data){drawChartGeneral(data.obecne);drawChartSoft(data.mekke);drawRoboBar(data,job);});}
 function drawChartGeneral(data){var categories=["Počítačová způsobilost","Numerická způsobilost","Jazyková způsobilost v dalším cizím jazyce","Jazyková způsobilost v češtině","Ekonomické povědomí","Právní povědomí","Jazyková způsobilost v angličtině","Způsobilost k řízení osobního automobilu"];var values=[];categories.forEach(function(category){if(data[category]){values.push(data[category]);}else{values.push(0.499);}})
 var chart=Highcharts.chart('graf1',{chart:{polar:true,type:'area'},title:{text:'Obecné dovednosti',},pane:{size:'80%'},xAxis:{categories:categories,tickmarkPlacement:'on',lineWidth:0},yAxis:{gridLineInterpolation:'polygon',lineWidth:0,tickInterval:1,min:0,max:3,labels:{enabled:false}},tooltip:{shared:true,pointFormat:'<span style="color:{series.color}">{series.name}: <b>{point.y:,.0f}</b><br/>'},legend:{align:'right',verticalAlign:'top',y:70,layout:'vertical',enabled:false},credits:{enabled:false},series:[{name:'Úroveň kvalifikace (1-3)',data:values,pointPlacement:'on'}],responsive:{rules:[{condition:{maxWidth:500},chartOptions:{pane:{size:'50%'},}}]}});}
@@ -256,7 +273,7 @@ var chart=Highcharts.chart('graf2',{chart:{polar:true,type:'area'},title:{text:'
 function drawRoboBar(data,job){var robotized=["Počítačová způsobilost","Numerická způsobilost","Jazyková způsobilost v dalším cizím jazyce","Jazyková způsobilost v angličtině","Způsobilost k řízení osobního automobilu","Celoživotní učení","Zvládání zátěže","Kooperace (spolupráce)","Flexibilita","Plánování a organizování práce","Výkonnost"];var catGeneral=["Počítačová způsobilost","Numerická způsobilost","Jazyková způsobilost v dalším cizím jazyce","Jazyková způsobilost v češtině","Ekonomické povědomí","Právní povědomí","Jazyková způsobilost v angličtině","Způsobilost k řízení osobního automobilu"];var catSoft=["Celoživotní učení","Zvládání zátěže","Samostatnost","Objevování a orientace v informacích","Kooperace (spolupráce)","Uspokojování zákaznických potřeb","Kreativita","Aktivní přístup","Flexibilita","Plánování a organizování práce","Vedení lidí (leadership)","Výkonnost","Ovlivňování ostatních","Efektivní komunikace","Řešení problémů"];var values={};for(var attrname in data.obecne){values[attrname]=data.obecne[attrname];}
 for(var attrname in data.mekke){values[attrname]=data.mekke[attrname];}
 var genTotal=0;var genRobo=0;var affected=[];catGeneral.forEach(function(category){if(data.obecne[category]){genTotal+=data.obecne[category];if($.inArray(category,robotized)!==-1){genRobo+=data.obecne[category];affected.push(category);}}});catSoft.forEach(function(category){if(data.mekke[category]){genTotal+=data.mekke[category]/5*3;if($.inArray(category,robotized)!==-1){genRobo+=data.mekke[category]/5*3;affected.push(category);}}});genTotal=parseInt(genTotal);genRobo=parseInt(genRobo);var ratio=parseInt(genRobo/genTotal*100)
-var chart=Highcharts.chart('grafBar',{chart:{type:'bar'},title:{text:'Roboti zastoupí povolání <b>'+job+"</b> v "+ratio+" % kompetencí"},xAxis:{categories:['Robotizace'],labels:{enabled:false},},yAxis:{min:0,title:{enabled:false}},tooltip:{enabled:false},legend:{enabled:false},plotOptions:{series:{stacking:'percent'}},series:[{name:'Nerobotizováno',data:[genTotal-genRobo]},{name:'Robotizováno',data:[genRobo]}],credits:{enabled:false}});affected_str="";affected.forEach(function(competence){affected_str+=competence.toLowerCase()+", "});$("#result").text("Roboti vás zastoupí v těchto oblastech: "+affected_str.replace(/, $/,"."));}
+var chart=Highcharts.chart('grafBar',{chart:{type:'bar'},title:{text:'Roboti zastoupí povolání <b>'+job+"</b> v "+ratio+" % kompetencí"},xAxis:{categories:['Robotizace'],labels:{enabled:false},},yAxis:{min:0,title:{enabled:false}},tooltip:{enabled:false},legend:{enabled:false},plotOptions:{series:{stacking:'percent'}},series:[{name:'Nerobotizováno',data:[genTotal-genRobo]},{name:'Robotizováno',data:[genRobo]}],credits:{enabled:false}});affected_str="";affected.forEach(function(competence){affected_str+=competence.toLowerCase()+", "});$("#result").text("Roboti zastoupí vybrané povolání v těchto oblastech: "+affected_str.replace(/, $/,"."));}
 function bezdiak(text){var sdiak="áäčďéěíĺľňóô öŕšťúů üýřžÁÄČĎÉĚÍĹĽŇÓÔ ÖŔŠŤÚŮ ÜÝŘŽ";var bdiak="aacdeeillnoo orstuu uyrzAACDEEILLNOO ORSTUU UYRZ";tx="";for(p=0;p<text.length;p++){if(sdiak.indexOf(text.charAt(p))!=-1){tx+=bdiak.charAt(sdiak.indexOf(text.charAt(p)));}
 else{tx+=text.charAt(p);}}
 return tx}});

@@ -5,3 +5,7 @@
 #selectMenu {
     width: 100%;
 }
+
+#result {
+    font-size: small;
+}
