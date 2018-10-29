@@ -48,7 +48,70 @@ $( function () {
     function loadData(job) {
         var slug = bezdiak(job).toLowerCase().replace(/ /g,"_").replace(/,|"/g,"");
         $.getJSON("https://data.irozhlas.cz/roboti-povolani/jobs_data/" + slug + ".json", function(data) {
-            $("#result").text(JSON.stringify(data));
+            drawChartGeneral(data.obecne);
+        });
+    }
+
+    function drawChartGeneral(data) {
+        var categories = ["Počítačová způsobilost", "Numerická způsobilost", "Jazyková způsobilost v dalším cizím jazyce", 
+                "Jazyková způsobilost v češtině", "Ekonomické povědomí", "Právní povědomí", "Jazyková způsobilost v angličtině",
+                "Způsobilost k řízení osobního automobilu"];
+        var values = [];
+        categories.forEach(function(category) {
+            if (data[category]) {
+                values.push(data[category]);
+            } else {
+                values.push(0);
+            }
+        })
+        console.log(data);
+        var chart = Highcharts.chart('graf1', {
+
+            chart: {
+                polar: true,
+                type: 'line'
+            },
+
+            title: {
+                text: 'Budget vs spending',
+            },
+
+            pane: {
+                size: '80%'
+            },
+
+            xAxis: {
+                categories: categories,
+                tickmarkPlacement: 'on',
+                lineWidth: 0
+            },
+
+            yAxis: {
+                gridLineInterpolation: 'polygon',
+                lineWidth: 0,
+                min: 0,
+                max: 3
+            },
+
+            tooltip: {
+                shared: true,
+                pointFormat: '<span style="color:{series.color}">{series.name}: <b>${point.y:,.0f}</b><br/>'
+            },
+
+            legend: {
+                align: 'right',
+                verticalAlign: 'top',
+                y: 70,
+                layout: 'vertical',
+                enabled: false
+            },
+
+            series: [{
+                name: 'Allocated Budget',
+                data: values,
+                pointPlacement: 'on'
+            }]
+
         });
     }
 
