@@ -11,7 +11,8 @@ $( function () {
         jobs.sort().forEach(function(entry) {
             $("#selectMenu").append("<option>" + entry + "</option>");
         })
-        
+
+        $("#selectMenu").select2();
 
         $("#selectMenu").change(function(choice) {
             loadData($( "select option:selected" ).text());
